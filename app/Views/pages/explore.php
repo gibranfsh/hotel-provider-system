@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="/css/styles.css">
 
 </head>
-<div class="mt-25 container px-8 mx-auto space-y-4 pb-24">
-    <div class="border rounded-lg shadow-lg m-10 py-10">
+
+<body class="bg-[#FF834F]">
+    <div class="mt-25 container px-8 mx-auto space-y-4 pb-24">
+
         <h1 class="text-center">Explore Hotel</h1>
         <div class="flex items-center justify-center ">
             <div class="bg-white w-[60%] mx-12 p-12 items-center justify-center">
@@ -42,19 +44,6 @@
                         </div>
 
                     </div>
-
-                    <div class="sm:w-1/2 mb-5">
-                        <label for="roomtype" class="block text-gray-700 font-medium mb-2">Tipe kamar</label>
-                        <select id="roomtype" name="roomtype" class="border border-gray-400 p-2 w-96 rounded-lg focus:outline-none focus:border-blue-400" required>
-                            <option value="">Tipe kamar</option>
-                            <option value="Deluxe">Deluxe</option>
-                            <option value="Superior">Superior</option>
-                            <option value="Family">Family</option>
-                            <option value="Suite">Suite</option>
-                        </select>
-                    </div>
-
-
                     <div class="justify-center">
                         <button class="mx-auto items-center hover:shadow-form w-72 rounded-md bg-[#FF834F] py-3 px-8 text-center text-base font-bold text-black outline-none">
                             <a href='/hotel'>Search</a>
@@ -63,5 +52,6 @@
                 </form>
             </div>
         </div>
+
     </div>
-</div>
+</body>

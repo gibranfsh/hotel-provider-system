@@ -29,7 +29,7 @@
                 <h3 class="text-center">Payment Method</h3>
                 <div class="sm:w-1/2 mb-5">
                     <label for="payment" class="block text-gray-700 font-medium mb-2">Payment Method</label>
-                    <select id="roomtype" name="roomtype" class="border border-gray-400 p-2 w-96 rounded-lg focus:outline-none focus:border-blue-400" required>
+                    <select id="payment" name="payment" class="border border-gray-400 p-2 w-96 rounded-lg focus:outline-none focus:border-blue-400" required>
                         <option value="Debit">Debit</option>
                         <option value="Kredit">Kredit</option>
                     </select>
