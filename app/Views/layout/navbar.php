@@ -48,6 +48,9 @@
                         <a class="nav-link" href="/booking">Booking</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/payment">Payment</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/hotel">Hotel</a>
                     </li>
                 </ul>
