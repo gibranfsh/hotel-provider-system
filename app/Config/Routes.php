@@ -11,3 +11,5 @@ $routes->get('/explore', 'Explore::index');
 $routes->get('/hotel', 'Hotel::index');
 $routes->get('/payment', 'Payment::index');
 $routes->get('/login', 'Login::index');
+$routes->post('/login', 'Login::loginAction');
+$routes->get('/logout', 'Login::logout');

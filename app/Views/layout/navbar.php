@@ -39,22 +39,20 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/explore">Explore</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/booking">Booking</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/payment">Payment</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/hotel">Hotel</a>
-                    </li>
-                </ul>
-            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/explore">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/booking">Booking</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/payment">Payment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/hotel">Hotel</a>
+                </li>
+            </ul>
         </div>
     </nav>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
