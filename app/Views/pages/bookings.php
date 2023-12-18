@@ -7,9 +7,25 @@
     <title>Bookings</title>
     <link href="/css/styles.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .flash-container {
+            max-width: 600px;
+            /* Set the desired max-width */
+            margin: 0 auto;
+            /* Center the container */
+        }
+    </style>
 </head>
 
 <body class="bg-[#FF834F]">
+    <!-- flash data -->
+    <?php if (session()->getFlashdata('success')) : ?>
+        <div class="flash-container">
+            <div class="alert alert-success" role="alert">
+                <?= session()->getFlashdata('success') ?>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="container px-8 mx-auto space-y-4 pb-24 bg-slate-100">
         <h1 class="text-center my-5">Your Bookings</h1>
 
