@@ -15,3 +15,10 @@ $routes->get('/payment', 'Payment::index');
 $routes->get('/login', 'Login::index');
 $routes->post('/login', 'Login::loginAction');
 $routes->get('/logout', 'Login::logout');
+
+// Grouping API routes for hoteloka
+$routes->group('api', function ($routes) {
+    $routes->post('login', 'Login::loginActionProvider');
+    $routes->put('booking/(:num)', 'Booking::updateProvider/$1');
+    $routes->delete('booking/(:num)', 'Booking::deleteProvider/$1');
+});

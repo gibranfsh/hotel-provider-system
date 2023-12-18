@@ -21,7 +21,8 @@ class BookingModel extends Model
         'room_type',
         'check_in_date',
         'check_out_date',
-        'payment_id'
+        'payment_id',
+        'reservation_id'
     ];
 
     // Dates

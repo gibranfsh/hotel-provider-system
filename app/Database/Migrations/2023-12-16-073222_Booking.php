@@ -19,6 +19,7 @@ class Booking extends Migration
             'check_in_date'  => ['type' => 'DATE'],
             'check_out_date' => ['type' => 'DATE'],
             'payment_id'    => ['type' => 'INT', 'constraint' => 5, 'unsigned' => true, 'null' => true],
+            'reservation_id' => ['type' => 'INT', 'constraint' => 5, 'unsigned' => true],
             'created_at'     => ['type' => 'DATETIME', 'null' => true],
             'updated_at'     => ['type' => 'DATETIME', 'null' => true],
         ]);
