@@ -202,6 +202,8 @@ class Booking extends BaseController
             // Process the response
             $body = json_decode($body, true);
 
+            // set flash data with success message
+            session()->setFlashdata('success', 'Booking created successfully');
             // Redirect to the bookings page
             return redirect()->to('/bookings');
         } catch (GuzzleException $e) {
