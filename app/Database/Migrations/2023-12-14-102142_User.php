@@ -16,8 +16,8 @@ class User extends Migration
                 'auto_increment' => true,
             ],
             'role' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 50,
+                'type'       => 'ENUM',
+                'constraint' => ['ADMIN', 'CUSTOMER']
             ],
             'fullName' => [
                 'type'       => 'VARCHAR',
@@ -28,6 +28,10 @@ class User extends Migration
                 'constraint' => 255,
             ],
             'email' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+            ],
+            'password' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],

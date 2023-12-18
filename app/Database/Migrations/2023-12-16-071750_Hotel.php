@@ -12,6 +12,8 @@ class Hotel extends Migration
             'id'         => ['type' => 'INT', 'constraint' => 5, 'unsigned' => true, 'auto_increment' => true],
             'name'       => ['type' => 'VARCHAR', 'constraint' => 255],
             'location'   => ['type' => 'VARCHAR', 'constraint' => 255],
+            'description' => ['type' => 'VARCHAR', 'constraint' => 255],
+            'status'     => ['type' => 'ENUM', 'constraint' => ['AVAILABLE', 'UNAVAILABLE']],
             'rating'     => ['type' => 'VARCHAR', 'constraint' => 5],
             'created_at' => ['type' => 'DATETIME', 'null' => true],
             'updated_at' => ['type' => 'DATETIME', 'null' => true],

@@ -15,14 +15,14 @@ class Payment extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-			'billTotal'       => [
+			'bill_total'       => [
 				'type'           => 'INT'
 			],
-			'paymentMethod'      => [
+			'payment_method'      => [
 				'type'           => 'ENUM',
 				'constraint'     => ['Card', 'Debit']
 			],
-			'paymentStatus' => [
+			'payment_status' => [
 				'type'           => 'ENUM',
 				'constraint'     => ['Paid', 'Unpaid']
 			],

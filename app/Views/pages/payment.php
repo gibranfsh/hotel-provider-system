@@ -4,42 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore</title>
+    <title>Payment</title>
     <link href="/css/styles.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-<body class="bg-[#FF834F]">
-    <h1 class="text-center">Payment</h1>
-    <div class="mt-25 container px-8 mx-auto space-y-4 pb-24 bg-slate-100">
-        <h2>GIN Hotel</h2>
-        <div class="divide-y divide-dashed divide-black outline-5">
-            <div>
-                <h3 class="text-center">Recap</h3>
-                <h4>Check in</h4>
-                <h5>DD/MM/YY</h5>
-                <h4>Check out</h4>
-                <h5>DD/MM/YY</h5>
-            </div>
-            <div>
-                <h3 class="text-center">Subtotal</h3>
-                <h4>Rp xxx.xxx</h4>
-            </div>
-            <div>
-                <h3 class="text-center">Payment Method</h3>
-                <div class="sm:w-1/2 mb-5">
-                    <label for="payment" class="block text-gray-700 font-medium mb-2">Payment Method</label>
-                    <select id="payment" name="payment" class="border border-gray-400 p-2 w-96 rounded-lg focus:outline-none focus:border-blue-400" required>
-                        <option value="Debit">Debit</option>
-                        <option value="Kredit">Kredit</option>
-                    </select>
+<body class="bg-[#FF834F] font-sans">
+    <div class="container mx-auto mt-16 p-8 bg-white shadow-lg rounded-md">
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Payment</h1>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">GIN Hotel</h2>
+
+            <div class="divide-y divide-dashed divide-gray-300">
+                <div class="py-4">
+                    <h3 class="text-lg font-semibold mb-2">Reservation Details</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p><span class="font-semibold">Check-In Date:</span> <?= esc($checkInDate) ?></p>
+                            <p><span class="font-semibold">Check-Out Date:</span> <?= esc($checkOutDate) ?></p>
+                        </div>
+                        <div>
+                            <p><span class="font-semibold">Room ID:</span> <?= esc($roomID) ?></p>
+                            <p><span class="font-semibold">Room Number:</span> <?= esc($roomNumber) ?></p>
+                            <p><span class="font-semibold">Floor:</span> <?= esc($floor) ?></p>
+                            <p><span class="font-semibold">Room Type:</span> <?= esc($roomType) ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-4">
+                    <h3 class="text-lg font-semibold mb-2">Subtotal</h3>
+                    <p class="text-xl font-bold text-gray-800">Rp <?= number_format($price, 0, ',', '.') ?></p>
                 </div>
             </div>
         </div>
-        <div class="justify-center">
-            <button class="mx-auto items-center hover:shadow-form w-72 rounded-md bg-[#FF834F] py-3 px-8 text-center text-base font-bold text-black outline-none">
-                <a href='/booking'>Pay</a>
-            </button>
-        </div>
+
+        <!-- Payment Form Section -->
+        <form id="paymentForm" action="/booking/create" method="post">
+            <input type="hidden" name="checkInDate" value="<?= esc($checkInDate) ?>">
+            <input type="hidden" name="checkOutDate" value="<?= esc($checkOutDate) ?>">
+            <input type="hidden" name="hotelID" value="<?= esc($hotelID) ?>">
+            <input type="hidden" name="roomID" value="<?= esc($roomID) ?>">
+            <input type="hidden" name="roomNumber" value="<?= esc($roomNumber) ?>">
+            <input type="hidden" name="floor" value="<?= esc($floor) ?>">
+            <input type="hidden" name="roomType" value="<?= esc($roomType) ?>">
+            <input type="hidden" name="price" value="<?= esc($price) ?>">
+            <div class="py-4">
+                <h3 class="text-lg font-semibold mb-2">Payment Method</h3>
+                <div class="sm:w-1/2">
+                    <label for="payment" class="block text-gray-700 font-medium mb-2">Select Payment Method</label>
+                    <select id="payment" name="paymentMethod" class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
+                        <option value="Debit">Debit</option>
+                        <option value="Card">Card</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-center">
+                <button type="submit" class="bg-[#FF834F] text-white px-6 py-3 rounded-full hover:bg-[#FF6F3E] focus:outline-none">
+                    Pay Now
+                </button>
+            </div>
+        </form>
     </div>
 </body>
+
+</html>

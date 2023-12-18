@@ -47,14 +47,22 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form action="/login_action" method="POST">
+        <?php if (session()->getFlashdata('error')) : ?>
+            <div class="alert alert-danger" role="alert">
+                <?= session()->getFlashdata('error') ?>
+            </div>
+        <?php endif; ?>
+
+        <form action="/login" method="POST">
             <div class="mb-3">
                 <input type="email" class="form-control" name="email" placeholder="Email" required>
             </div>
             <div class="mb-3">
                 <input type="password" class="form-control" name="password" placeholder="Password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class='mt-8'>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
         </form>
     </div>
 
