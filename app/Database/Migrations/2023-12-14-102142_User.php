@@ -17,7 +17,7 @@ class User extends Migration
             ],
             'role' => [
                 'type'       => 'ENUM',
-                'constraint' => ['ADMIN', 'CUSTOMER']
+                'constraint' => ['ADMIN', 'CUSTOMER', 'HOTEL']
             ],
             'fullName' => [
                 'type'       => 'VARCHAR',

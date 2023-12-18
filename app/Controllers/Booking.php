@@ -6,6 +6,8 @@ use App\Controllers\BaseController;
 use App\Models\BookingModel;
 use App\Models\HotelModel;
 use App\Models\PaymentModel;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -19,12 +21,6 @@ class Booking extends BaseController
 
         // Melakukan login ke API untuk mendapatkan access token (send a post request to the login endpoint) bersama dengan body request berupa email dan password
         $ginHotelAPILoginURL = getenv('ginHotelBaseURL') . '/api/login';
-
-        // Prepare the data for the login request
-        $loginData = [
-            'email' => $ginHotelAPIEmail,
-            'password' => $ginHotelAPIPassword,
-        ];
 
         // Initialize Guzzle client
         $client = new Client();
@@ -152,20 +148,6 @@ class Booking extends BaseController
 
         $paymentModel->insert($paymentData);
 
-        $bookingData = [
-            'user_id' => session()->get('user_id'), // di tabel Booking
-            'check_in_date' => $checkInDate, // di tabel Booking
-            'check_out_date' => $checkOutDate, // di tabel Booking
-            'hotel_id' => $hotelID, // di tabel Booking
-            'payment_id' => $paymentModel->getInsertID(), // di tabel Booking
-            'room_id' => $roomID, // di tabel Booking
-            'room_number' => $roomNumber, // di tabel Booking
-            'room_floor' => $floor, // di tabel Booking
-            'room_type' => $roomType, // di tabel Booking
-        ];
-
-        $bookingModel->insert($bookingData);
-
         // Initialize Guzzle client
         $client = new Client();
 
@@ -202,6 +184,23 @@ class Booking extends BaseController
             // Process the response
             $body = json_decode($body, true);
 
+            $reservationID = $body['reservationID'];
+
+            $bookingData = [
+                'user_id' => session()->get('user_id'), // di tabel Booking
+                'check_in_date' => $checkInDate, // di tabel Booking
+                'check_out_date' => $checkOutDate, // di tabel Booking
+                'hotel_id' => $hotelID, // di tabel Booking
+                'payment_id' => $paymentModel->getInsertID(), // di tabel Booking
+                'room_id' => $roomID, // di tabel Booking
+                'room_number' => $roomNumber, // di tabel Booking
+                'room_floor' => $floor, // di tabel Booking
+                'room_type' => $roomType, // di tabel Booking
+                'reservation_id' => $reservationID, // di tabel Booking
+            ];
+
+            $bookingModel->insert($bookingData);
+
             // set flash data with success message
             session()->setFlashdata('success', 'Booking created successfully');
             // Redirect to the bookings page
@@ -210,8 +209,88 @@ class Booking extends BaseController
             // Catch and handle exceptions
             dd($e->getMessage());
         }
+    }
 
-        // // Redirect to the homepage
-        // return redirect()->to('/');
+    public function updateProvider($reservationID)
+    {
+        // Get JWT from request Authorization header
+        $token = $this->request->getHeaderLine('Authorization');
+
+        $this->response->setJSON(['token' => $token]);
+        // Validate JWT
+        $key = getenv('JWT_SECRET');
+
+        try {
+            $decodedJWT = JWT::decode($token, new Key($key, 'HS256'));
+        } catch (\Exception $e) {
+            // Log the exception message for debugging
+            log_message('error', 'Exception during JWT validation: ' . $e->getMessage());
+
+            // Return a JSON response indicating a server error
+            return $this->response->setStatusCode(500)->setJSON(['error' => 'Internal Server Error']);
+        }
+
+        $body = $this->request->getJSON();
+
+        $checkInDate = $body->checkInDate;
+        $checkOutDate = $body->checkOutDate;
+
+        $bookingModel = new BookingModel();
+
+        $booking = $bookingModel->where('reservation_id', $reservationID)->first();
+
+        $bookingData = [
+            'check_in_date' => $checkInDate,
+            'check_out_date' => $checkOutDate,
+        ];
+
+        try {
+            $bookingModel->update($booking['id'], $bookingData);
+        } catch (\Exception $e) {
+            // Log the exception message for debugging
+            log_message('error', 'Exception during booking update: ' . $e->getMessage());
+
+            // Return a JSON response indicating a server error
+            return $this->response->setStatusCode(500)->setJSON(['error' => 'Internal Server Error']);
+        }
+
+        return $this->response->setJSON(['message' => 'Booking updated successfully']);
+    }
+
+    public function deleteProvider($reservationID)
+    {
+        // Get JWT from request Authorization header
+        $token = $this->request->getHeaderLine('Authorization');
+
+        // Validate JWT
+        $key = getenv('JWT_SECRET');
+
+        try {
+            $decodedJWT = JWT::decode($token, new Key($key, 'HS256'));
+        } catch (\Exception $e) {
+            // Log the exception message for debugging
+            log_message('error', 'Exception during JWT validation: ' . $e->getMessage());
+
+            // Return a JSON response indicating a server error
+            return $this->response->setStatusCode(500)->setJSON(['error' => 'Internal Server Error']);
+        }
+
+        $paymentModel = new PaymentModel();
+        $bookingModel = new BookingModel();
+
+        $booking = $bookingModel->where('reservation_id', $reservationID)->first();
+
+        try {
+            $paymentModel->delete($booking['payment_id']);
+            $bookingModel->delete($booking['id']);
+        } catch (\Exception $e) {
+            // Log the exception message for debugging
+            log_message('error', 'Exception during booking deletion: ' . $e->getMessage());
+
+            // Return a JSON response indicating a server error
+            return $this->response->setStatusCode(500)->setJSON(['error' => 'Internal Server Error']);
+        }
+
+        return $this->response->setJSON(['message' => 'Booking deleted successfully']);
     }
 }

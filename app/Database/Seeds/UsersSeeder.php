@@ -23,6 +23,13 @@ class UsersSeeder extends Seeder
                 'role' => 'CUSTOMER',
                 'phoneNumber'    => '081234567890',
             ],
+            [
+                'fullName'    => 'GIN Hotel',
+                'email'    => 'ginhotel@hoteloka.com',
+                'password' => password_hash('ginhotelxhoteloka', PASSWORD_DEFAULT),
+                'role' => 'HOTEL',
+                'phoneNumber'    => '081234567890',
+            ]
         ];
 
         // Insert data into the table
