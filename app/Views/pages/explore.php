@@ -11,7 +11,10 @@
 
 <body class="bg-[#FF834F]">
     <div class="mt-25 container px-8 mx-auto space-y-4 pb-24">
-        <h1 class="text-center">Explore Hotel</h1>
+        <h1 class="text-left">Explore</h1>
+        <div class=" ">
+            <img class="block relative bg-center items-center mx-auto w-80" src="/img/hoteloka.png" alt="hoteloka" />
+        </div>
 
         <!-- Search Form ... (your existing form) -->
 
