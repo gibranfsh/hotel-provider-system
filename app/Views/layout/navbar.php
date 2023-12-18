@@ -28,6 +28,19 @@
         .navbar-nav .nav-link:hover {
             color: #0056b3;
         }
+
+        /* Style for the logout button */
+        .navbar-nav .nav-item .nav-logout {
+            background-color: #dc3545;
+            color: #fff;
+            border-radius: 5px;
+            padding: 8px 15px;
+        }
+
+        .navbar-nav .nav-item .nav-logout:hover {
+            background-color: #c82333;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -44,14 +57,17 @@
                     <a class="nav-link" href="/explore">Explore</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/booking">Booking</a>
+                    <a class="nav-link" href="/bookings">Bookings</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/payment">Payment</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/hotel">Hotel</a>
-                </li>
+                <?php
+                helper('cookie');
+
+                $token = get_cookie('login_token');
+
+                if ($token) {
+                    echo '<li class="nav-item"><a class="nav-link nav-logout" href="/logout">Logout</a></li>';
+                }
+                ?>
             </ul>
         </div>
     </nav>

@@ -56,6 +56,11 @@ class Login extends BaseController
 
         $token = JWT::encode($payload, $key, "HS256");
 
+        session()->set('user_id', $user['id']);
+        session()->set('user_full_name', $user['fullName']);
+        session()->set('user_email', $user['email']);
+        session()->set('user_phone_number', $user['phoneNumber']);
+
         setcookie('login_token', $token, time() + 3600, "/"); // 3600 seconds = 1 hour
 
         if (isset($_COOKIE["login_token"])) {
@@ -70,6 +75,10 @@ class Login extends BaseController
     // logout delete cookie
     public function logout()
     {
+        session()->remove('user_id');
+        session()->remove('user_full_name');
+        session()->remove('user_email');
+        session()->remove('user_phone_number');
         setcookie('login_token', '', time() - 3600, "/"); // 3600 seconds = 1 hour
         return redirect()->to('/login');
     }

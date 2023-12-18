@@ -2,10 +2,19 @@
 
 namespace App\Controllers;
 
+use App\Models\HotelModel;
+
 class Explore extends BaseController
 {
     public function index(): string
     {
-        return view('layout/navbar') . view('pages/explore') . view('layout/footer');
+        $hotelModel = new HotelModel();
+        $data = $hotelModel->findAll();
+
+        $viewData = [
+            'data' => $data,
+        ];
+
+        return view('layout/navbar') . view('pages/explore', $viewData) . view('layout/footer');
     }
 }

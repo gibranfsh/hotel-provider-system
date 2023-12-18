@@ -11,7 +11,7 @@
 <body>
     <div class=" ">
 
-        <img class="absolute z-[-10]" src="/img/gambarhotel.png" alt="gambar hotel" />
+        <img class="w-full absolute z-[-10]" src="/img/gambarhotel.png" alt="gambar hotel" />
         <div class="w-full mx-auto text-center contents-center pt-12">
             <img class="block relative bg-center items-center mx-auto w-80" src="/img/hoteloka.png" alt="hoteloka" />
         </div>

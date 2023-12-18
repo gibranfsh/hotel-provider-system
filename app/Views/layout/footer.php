@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
-<body style="min-height: 100vh; position: relative; margin-bottom: -50px;">
+<body class="d-flex flex-column min-vh-100">
 
-    <div style="margin-bottom: 50px;"></div>
+    <div class="flex-grow-1">
+        <!-- Your main content goes here -->
+    </div>
 
-    <footer class="bg-dark text-light py-3 fixed-bottom">
+    <footer class="w-100 bg-dark text-light py-4">
         <div class="container text-center">
             <p class="mb-0">Copyright Gibeh - Ilma - Nadine</p>
         </div>
